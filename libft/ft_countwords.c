@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_countwords.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mthoman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/26 10:45:30 by mthoman           #+#    #+#             */
-/*   Updated: 2018/11/26 10:45:37 by mthoman          ###   ########.fr       */
+/*   Created: 2018/11/15 14:31:06 by mthoman           #+#    #+#             */
+/*   Updated: 2018/11/15 14:39:15 by mthoman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <string.h>
-# include <fcntl.h>
-# include <sys/types.h>
-# include "libft/libft.h"
+int		ft_countwords(char const *s, char c)
+{
+	int i;
+	int words;
 
-# define BUFF_SIZE 4
-# define MAXFD 1024
-
-int	get_next_line(int const fd, char **line);
-
-#endif
+	words = 0;
+	i = 0;
+	while (s[i] != '\0' && s[i] == c)
+		i++;
+	while (s[i] != '\0')
+	{
+		if (s[i] == c)
+		{
+			while (s[i] == c)
+				i++;
+			words++;
+		}
+		else
+			i++;
+	}
+	if (s[i - 1] != c)
+		words++;
+	return (words);
+}
